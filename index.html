@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Historias</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="story-container">
+
+  
+  <div class="story active">
+    <div class="top">
+      <div class="progress-bar"><div class="progress"></div></div>
+      <div class="profile">
+        <img src="images/pfp.jpg">
+        <span>Ivy.dev</span>
+      </div>
+    </div>
+        <img class="story-img" src="images/story1.jpeg">
+  </div>
+
+  
+  <div class="story">
+    <div class="top">
+      <div class="progress-bar"><div class="progress"></div></div>
+      <div class="profile">
+        <img src="images/pfp.jpg">
+        <span>Ivy.dev</span>
+      </div>
+    </div>
+     <img class="story-img" src="images/story2.jpeg">
+  </div>
+
+
+
+  <div class="story text-story">
+    <div class="top">
+      <div class="progress-bar"><div class="progress"></div></div>
+      <div class="profile">
+        <img src="images/pfp.jpg">
+        <span>Ivy.dev</span>
+      </div>
+    </div>
+
+    <div class="txt">
+      <p>
+        Se que no soy el mejor novio que podrias tener pero te prometo que cada dia
+            voy a esforzarme por serlo, por hacerte feliz y por demostrarte
+            que eres lo mas importante en mi vida.
+            y asi tu decidas ya no quedarte a mi lado, siempre te amare 
+            y te tendre como un valioso recuerdo en mi corazon....
+      </p>
+      <a href="fireworks.html" class="story-btn">
+      Feliz año...
+      :c
+    </a>
+  </div>
+</div>
+
+<script >
+
+    let stories = document.querySelectorAll(".story");
+let index = 0;
+let duration = 4000;
+let interval;
+
+function showStory(i) {
+  stories.forEach(s => {
+    s.classList.remove("active");
+    s.querySelector(".progress").style.width = "0%";
+  });
+
+  let current = stories[i];
+  current.classList.add("active");
+
+  let bar = current.querySelector(".progress");
+  let width = 0;
+
+  clearInterval(interval);
+
+  interval = setInterval(() => {
+    width++;
+    bar.style.width = width + "%";
+
+    if (width >= 100) {
+      clearInterval(interval);
+      nextStory();
+    }
+  }, duration / 100);
+}
+
+function nextStory() {
+  index++;
+  if (index >= stories.length) index = 0;
+  showStory(index);
+}
+
+
+document.querySelector(".story-container").addEventListener("click", e => {
+  if (e.clientX > window.innerWidth / 2) {
+    index++;
+  } else {
+    index--;
+  }
+
+  if (index < 0) index = stories.length - 1;
+  if (index >= stories.length) index = 0;
+
+  showStory(index);
+});
+
+showStory(index);
+
+</script>
+</body>
+</html>
